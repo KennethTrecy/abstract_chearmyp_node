@@ -1,0 +1,9 @@
+[package]
+name = "abstract_chearmyp_node"
+version = "0.1.0-dev"
+authors = ["Kenneth Trecy Tobias <33564322+KennethTrecy@users.noreply.github.com>"]
+edition = "2018"
+
+[features]
+default = []
+no_std = []
