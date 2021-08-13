@@ -4,6 +4,15 @@ version = "0.1.0-dev"
 authors = ["Kenneth Trecy Tobias <33564322+KennethTrecy@users.noreply.github.com>"]
 edition = "2018"
 
+[dependencies.abstract_chearmyp_source]
+git = "http://chearmyp.local/abstract_chearmyp_source"
+tag = "v0.4.0"
+
+[dev-dependencies.abstract_chearmyp_source]
+git = "http://chearmyp.local/abstract_chearmyp_source"
+tag = "v0.4.0"
+features = ["str_source", "vec_source_collection"]
+
 [features]
 default = []
 no_std = []
