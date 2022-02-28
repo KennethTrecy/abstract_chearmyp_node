@@ -50,3 +50,7 @@ where
 	/// and third parameter contains other subconcepts that makes the main concept.
 	fn new_complex(_: U, _: A, _: C) -> Self;
 }
+
+mod simple_abstract_node;
+
+pub use simple_abstract_node::SimpleAbstractNode;
