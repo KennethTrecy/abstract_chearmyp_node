@@ -15,3 +15,6 @@ pub trait AbstractAttacherCollection<T, U> {
 	/// Takes the attacher in the attacher collection.
 	fn deattach(&mut self, _: T) -> Option<U>;
 }
+
+#[cfg(any(feature = "vecdeque_attacher_collection", test))]
+mod vec_deque;
