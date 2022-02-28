@@ -9,3 +9,6 @@ pub trait AbstractNodeQueue<T> {
 	/// Moves out the earlieast node in the node queue.
 	fn shift_node(&mut self) -> Option<T>;
 }
+
+#[cfg(any(feature = "vecdeque_node_queue", test))]
+mod vec_deque;
