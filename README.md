@@ -18,7 +18,7 @@ features = ["no_std", "assertable_node_kind", "vecdeque_node_queue", "vecdeque_a
 ```
 
 ## Origin
-The repository was based from [`filled_bare_metal`] branch of [Feo Template].
+Some parts of the repository was based from [`filled_bare_metal`] branch of [Feo Template].
 
 ### Author
 Abstract Chearmyp Node was created by Kenneth Trecy Tobias.
