@@ -6,11 +6,11 @@ edition = "2021"
 
 [dependencies.abstract_chearmyp_boundary]
 git = "https://github.com/KennethTrecy/abstract_chearmyp_boundary"
-tag = "v0.1.3"
+tag = "v0.2.0"
 
 [dev-dependencies.abstract_chearmyp_boundary]
 git = "https://github.com/KennethTrecy/abstract_chearmyp_boundary"
-tag = "v0.1.3"
+tag = "v0.2.0"
 features = ["range_boundary", "vec_boundary_collection"]
 
 [features]
