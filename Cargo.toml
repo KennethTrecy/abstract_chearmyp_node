@@ -1,6 +1,6 @@
 [package]
 name = "abstract_chearmyp_node"
-version = "0.1.0"
+version = "0.2.0-dev"
 authors = ["Kenneth Trecy Tobias <web.kennethtobias@gmail.com>"]
 edition = "2021"
 
