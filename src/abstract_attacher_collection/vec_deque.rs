@@ -1,18 +1,17 @@
-use crate::native::VecDeque;
+use crate::native::{VecDeque, Fn};
 use crate::{AbstractAttacherNode, AbstractAttacherCollection};
 
 /// This is only available if `vecdeque_attacher_collection` feature has been activated.
 ///
 /// It implements [AbstractAttacherCollection] for [VecDeque].
-impl<T, U> AbstractAttacherCollection<T, U> for VecDeque<U>
+impl<T> AbstractAttacherCollection<T> for VecDeque<T>
 where
-	U: AbstractAttacherNode<Label = T>,
-	T: PartialEq {
+	T: AbstractAttacherNode {
 	fn new() -> Self { VecDeque::new() }
 
-	fn get(&self, label: T) -> Option<&U> {
+	fn get<U: Fn(&T) -> bool>(&self, filter: U) -> Option<&T> {
 		for attacher in self {
-			if attacher.label() == &label {
+			if filter(attacher) {
 				return Some(attacher);
 			}
 		}
@@ -20,9 +19,9 @@ where
 		None
 	}
 
-	fn get_mut(&mut self, label: T) -> Option<&mut U> {
+	fn get_mut<U: Fn(&T) -> bool>(&mut self, filter: U) -> Option<&mut T> {
 		for attacher in self {
-			if attacher.label() == &label {
+			if filter(attacher) {
 				return Some(attacher);
 			}
 		}
@@ -30,14 +29,14 @@ where
 		None
 	}
 
-	fn attach(&mut self, node: U) {
+	fn attach(&mut self, node: T) {
 		self.push_back(node);
 	}
 
-	fn deattach(&mut self, label: T) -> Option<U> {
+	fn deattach<U: Fn(&T) -> bool>(&mut self, filter: U) -> Option<T> {
 		let mut i = 0;
 		for attacher in self.iter() {
-			if attacher.label() == &label {
+			if filter(attacher) {
 				break;
 			} else {
 				i += 1;
@@ -78,7 +77,7 @@ mod t {
 
 	#[test]
 	fn should_attach() {
-		let mut queue = <VecDeque<Attacher> as AbstractAttacherCollection<&str, Attacher>>::new();
+		let mut queue = <VecDeque<Attacher> as AbstractAttacherCollection<Attacher>>::new();
 		let mut expected_queue = VecDeque::new();
 		expected_queue.push_back(Attacher::new("a"));
 
@@ -89,20 +88,24 @@ mod t {
 
 	#[test]
 	fn should_deattach_none() {
-		let mut queue = <VecDeque<Attacher> as AbstractAttacherCollection<&str, Attacher>>::new();
+		let mut queue = <VecDeque<Attacher> as AbstractAttacherCollection<Attacher>>::new();
 		let expected_node = None;
 
-		let node = queue.deattach("a");
+		let node = queue.deattach(|attacher: &Attacher| {
+			attacher.label() == &"a"
+		});
 
 		assert_eq!(node, expected_node);
 	}
 
 	#[test]
 	fn should_deattach_some() {
-		let mut queue = <VecDeque<Attacher> as AbstractAttacherCollection<&str, Attacher>>::new();
+		let mut queue = <VecDeque<Attacher> as AbstractAttacherCollection<Attacher>>::new();
 		queue.push_back(Attacher::new("a"));
 
-		let node = queue.deattach("a");
+		let node = queue.deattach(|attacher: &Attacher| {
+			attacher.label() == &"a"
+		});
 
 		assert_eq!(node, Some(Attacher::new("a")));
 	}

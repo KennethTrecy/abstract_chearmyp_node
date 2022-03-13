@@ -36,10 +36,16 @@ mod native {
 		collections::VecDeque
 	};
 
+	#[cfg(feature = "no_std")]
+	pub use core::{
+		ops::Fn
+	};
+
 	#[cfg(not(feature = "no_std"))]
 	pub use std::{
 		vec::Vec,
-		collections::VecDeque
+		collections::VecDeque,
+		ops::Fn
 	};
 }
 
