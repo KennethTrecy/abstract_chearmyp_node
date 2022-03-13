@@ -63,6 +63,21 @@ pub trait DynamicAbstractNode {
 
 	/// Returns the comments to the attacher.
 	fn comments(&self) -> &Self::Comments;
+
+	/// Consumes the attacher node into tuple.
+	fn consume_attacher(self) -> (Self::Label, Self::Content, Self::Comments);
+
+	/// Consumes the block comment or othertongue node into block.
+	fn consume_block(self) -> Self::Block;
+
+	/// Consumes the simplex node into tuple.
+	fn consume_simplex(self) -> (Self::Name, Self::Attachers);
+
+	/// Consumes the complex node into tuple.
+	fn consume_complex(self) -> (Self::Name, Self::Attachers, Self::Nodes);
+
+	/// Consumes the line comment or othertongue node into line.
+	fn consume_line(self) -> Self::Line;
 }
 
 mod abstract_complex_node;

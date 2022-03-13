@@ -70,6 +70,10 @@ mod t {
 		fn content(&self) -> &Self::Content { &self._data }
 
 		fn comments(&self) -> &Self::Comments { &self.comments }
+
+		fn consume(self) -> (Self::Label, Self::Content, Self::Comments) {
+			(self._data, self._data, self.comments)
+		}
 	}
 
 	#[test]

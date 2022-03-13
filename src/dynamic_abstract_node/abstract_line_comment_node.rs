@@ -7,4 +7,8 @@ where
 	type Line = T;
 
 	fn line(&self) -> &Self::Line { DynamicAbstractNode::line(self) }
+
+	fn consume(self) -> Self::Line {
+		DynamicAbstractNode::consume_line(self)
+	}
 }

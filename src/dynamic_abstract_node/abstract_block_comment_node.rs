@@ -7,4 +7,8 @@ where
 	type Block = T;
 
 	fn block(&self) -> &Self::Block { DynamicAbstractNode::block(self) }
+
+	fn consume(self) -> Self::Block {
+		DynamicAbstractNode::consume_block(self)
+	}
 }

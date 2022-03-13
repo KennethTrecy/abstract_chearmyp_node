@@ -10,4 +10,8 @@ where
 	fn name(&self) -> &Self::Simplex { DynamicAbstractNode::name(self) }
 
 	fn attachers(&self) -> &Self::Attachers { DynamicAbstractNode::attachers(self) }
+
+	fn consume(self) -> (Self::Simplex, Self::Attachers) {
+		DynamicAbstractNode::consume_simplex(self)
+	}
 }

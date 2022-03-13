@@ -13,4 +13,8 @@ where
 	fn attachers(&self) -> &Self::Attachers { DynamicAbstractNode::attachers(self) }
 
 	fn nodes(&self) -> &Self::Nodes { DynamicAbstractNode::nodes(self) }
+
+	fn consume(self) -> (Self::Complex, Self::Attachers, Self::Nodes) {
+		DynamicAbstractNode::consume_complex(self)
+	}
 }
