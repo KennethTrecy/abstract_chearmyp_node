@@ -2,13 +2,13 @@ use crate::abstracts::{AbstractBoundary, AbstractBoundaryCollection};
 use crate::{NodeKind, AbstractNodeQueue, AbstractAttacherCollection};
 
 /// An abstraction of Chearmyp node.
-pub trait AbstractNode<T, U, V, W, X, Y, Z, A, B, C>
+pub trait AbstractNode<T, U, V, W, X, Y, Z, A, B>
 where
 	U: AbstractBoundary<T>,
 	W: AbstractBoundary<V>,
 	X: AbstractBoundaryCollection<V, W>,
-	A: AbstractAttacherCollection<Y, Z>,
-	C: AbstractNodeQueue<B> {
+	Z: AbstractAttacherCollection<Y>,
+	B: AbstractNodeQueue<A> {
 	/// Returns the kind of the node it holds.
 	fn kind(&self) -> NodeKind;
 
@@ -42,13 +42,13 @@ where
 	///
 	/// First parameter is the concept name, and the second parameter contains the attachers for the
 	/// concept.
-	fn new_simplex(_: U, _: A) -> Self;
+	fn new_simplex(_: U, _: Z) -> Self;
 
 	/// Creates new complex node.
 	///
 	/// First parameter is the concept name; second parameter contains the attachers for the concept;
 	/// and third parameter contains other subconcepts that makes the main concept.
-	fn new_complex(_: U, _: A, _: C) -> Self;
+	fn new_complex(_: U, _: Z, _: B) -> Self;
 }
 
 mod simple_abstract_node;

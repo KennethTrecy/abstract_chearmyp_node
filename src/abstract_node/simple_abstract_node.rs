@@ -8,12 +8,12 @@ use crate::{NodeKind, AbstractNodeQueue, AbstractAttacherCollection};
 /// [AbstractBoundary]. Implementing this trait automatically implements the [AbstractNode].
 ///
 /// [AbstractNode]: crate::AbstractNode
-pub trait SimpleAbstractNode<T, U, V, W, X, Y, Z>
+pub trait SimpleAbstractNode<T, U, V, W, X, Y>
 where
 	U: AbstractBoundary<T>,
 	V: AbstractBoundaryCollection<T, U>,
-	Y: AbstractAttacherCollection<W, X>,
-	Z: AbstractNodeQueue<X> {
+	X: AbstractAttacherCollection<W>,
+	Y: AbstractNodeQueue<W> {
 	/// Returns the kind of the node it holds.
 	fn kind(&self) -> NodeKind;
 
@@ -33,21 +33,21 @@ where
 	fn new_attacher(_: U, _: U, _: V) -> Self;
 
 	/// Creates new simplex node.
-	fn new_simplex(_: U, _: Y) -> Self;
+	fn new_simplex(_: U, _: X) -> Self;
 
 	/// Creates new complex node.
-	fn new_complex(_: U, _: Y, _: Z) -> Self;
+	fn new_complex(_: U, _: X, _: Y) -> Self;
 }
 
 use super::AbstractNode;
 
-impl<T, U, V, W, X, Y, Z, A> AbstractNode<T, U, T, U, V, W, X, Y, X, Z> for A
+impl<T, U, V, W, X, Y, Z> AbstractNode<T, U, T, U, V, W, X, W, Y> for Z
 where
 	U: AbstractBoundary<T>,
 	V: AbstractBoundaryCollection<T, U>,
-	Y: AbstractAttacherCollection<W, X>,
-	Z: AbstractNodeQueue<X>,
-	A: SimpleAbstractNode<T, U, V, W, X, Y, Z> {
+	X: AbstractAttacherCollection<W>,
+	Y: AbstractNodeQueue<W>,
+	Z: SimpleAbstractNode<T, U, V, W, X, Y> {
 	fn kind(&self) -> NodeKind { SimpleAbstractNode::kind(self) }
 
 	fn new_line_comment(line: U) -> Self { Self::new_line_comment(line) }
@@ -62,9 +62,9 @@ where
 		Self::new_attacher(label, content, comments)
 	}
 
-	fn new_simplex(concept: U, attachers: Y) -> Self { Self::new_simplex(concept, attachers) }
+	fn new_simplex(concept: U, attachers: X) -> Self { Self::new_simplex(concept, attachers) }
 
-	fn new_complex(concept: U, attachers: Y, nodes: Z) -> Self {
+	fn new_complex(concept: U, attachers: X, nodes: Y) -> Self {
 		Self::new_complex(concept, attachers, nodes)
 	}
 }
