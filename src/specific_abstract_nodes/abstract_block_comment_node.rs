@@ -6,4 +6,7 @@ pub trait AbstractBlockCommentNode {
 
 	/// Returns the block in the block comment node.
 	fn block(&self) -> &Self::Block;
+
+	/// Consumes the block comment node into block.
+	fn consume(self) -> Self::Block;
 }

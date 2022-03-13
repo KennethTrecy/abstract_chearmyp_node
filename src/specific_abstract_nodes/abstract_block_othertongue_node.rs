@@ -6,4 +6,7 @@ pub trait AbstractBlockOthertongueNode {
 
 	/// Returns the block in the block othertongue node.
 	fn block(&self) -> &Self::Block;
+
+	/// Consumes the block othertongue node into block.
+	fn consume(self) -> Self::Block;
 }

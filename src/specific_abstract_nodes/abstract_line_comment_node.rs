@@ -5,4 +5,7 @@ pub trait AbstractLineCommentNode {
 
 	/// Returns the line in line comment node.
 	fn line(&self) -> &Self::Line;
+
+	/// Consumes the line comment node into line.
+	fn consume(self) -> Self::Line;
 }

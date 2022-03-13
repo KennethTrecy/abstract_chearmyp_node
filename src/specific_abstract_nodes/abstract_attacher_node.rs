@@ -17,4 +17,7 @@ pub trait AbstractAttacherNode {
 
 	/// Returns the comments to the attacher.
 	fn comments(&self) -> &Self::Comments;
+
+	/// Consumes the attacher node into tuple.
+	fn consume(self) -> (Self::Label, Self::Content, Self::Comments);
 }

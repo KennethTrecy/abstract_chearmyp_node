@@ -17,4 +17,7 @@ pub trait AbstractComplexNode {
 
 	/// Returns the nodes in the complex node.
 	fn nodes(&self) -> &Self::Nodes;
+
+	/// Consumes the complex node into tuple.
+	fn consume(self) -> (Self::Complex, Self::Attachers, Self::Nodes);
 }

@@ -11,4 +11,7 @@ pub trait AbstractSimplexNode {
 
 	/// Returns the attachers of the simplex node.
 	fn attachers(&self) -> &Self::Attachers;
+
+	/// Consumes the simplex node into tuple.
+	fn consume(self) -> (Self::Simplex, Self::Attachers);
 }

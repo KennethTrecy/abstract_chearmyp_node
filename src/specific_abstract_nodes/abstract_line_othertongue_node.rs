@@ -5,4 +5,7 @@ pub trait AbstractLineOthertongueNode {
 
 	/// Returns the line in line othertongue node.
 	fn line(&self) -> &Self::Line;
+
+	/// Consumes the line othertongue node into line.
+	fn consume(self) -> Self::Line;
 }
