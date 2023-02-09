@@ -1,0 +1,16 @@
+{
+	"private": "true",
+	"license": "MIT",
+	"scripts": {
+		"prepare": "husky install"
+	},
+	"dependencies": {
+
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.3.0",
+		"@commitlint/config-conventional": "^17.3.0",
+		"changelogen": "^0.4.0",
+		"husky": "^8.0.0"
+	}
+}

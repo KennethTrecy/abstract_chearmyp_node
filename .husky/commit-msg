@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+if [ -f "$(dirname -- "$0")/_/commit-msg" ]; then
+	. "$(dirname -- "$0")/_/commit-msg"
+	exitCode="$?"
+
+	if [ $exitCode != 0 ]; then
+		exit $exitCode
+	fi
+fi
+
+npx --no -- commitlint --edit ${1}

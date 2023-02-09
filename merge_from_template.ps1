@@ -44,4 +44,4 @@ if ($LastExitCode -ne 0) {
 }
 
 & git add .
-& git commit
+& git commit -m "chore: update the files from template"
